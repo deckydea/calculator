@@ -44,7 +44,6 @@ class CalculatorNotifier extends StateNotifier<Calculation> {
       if (MathUtils.isOperator(buttonText) && MathUtils.isOperatorAtEnd(state.equation)) {
         final newEquation = state.equation.substring(0, state.equation.length - 1);
         return newEquation + buttonText;
-
       } else if (state.shouldAppend) {
         return state.equation == '0' ? buttonText : state.equation + buttonText;
       } else {
@@ -68,13 +67,19 @@ class CalculatorNotifier extends StateNotifier<Calculation> {
       final exp = Parser().parse(expression);
       final model = ContextModel();
 
-      final result = '${exp.evaluate(EvaluationType.REAL, model)}';
-      state = state.copy(result: result);
+      final result = exp.evaluate(EvaluationType.REAL, model);
+      final formattedResult = formatResult(result); // Format the result
+      state = state.copy(result: formattedResult);
     } catch (e) {
-      //Print error
+      // Print error
       if (kDebugMode) {
         print(e);
       }
     }
+  }
+
+  String formatResult(double result) {
+    final formattedResult = result.toStringAsFixed(2);
+    return formattedResult.endsWith('.00') ? formattedResult.substring(0, formattedResult.length - 3) : formattedResult;
   }
 }

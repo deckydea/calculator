@@ -41,6 +41,8 @@ dependencies:
 
   # Calculate Expressions
   math_expressions: ^2.4.0
+  decimal: ^2.3.3
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

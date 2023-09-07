@@ -22,12 +22,22 @@ class ButtonWidget extends StatelessWidget {
       case '⨯':
       case '÷':
       case '=':
-        return ColorResources.buttonSecondary;
+        return ColorResources.textSecondary;
       case 'AC':
       case '<':
-        return ColorResources.buttonPrimary;
+        return ColorResources.textPrimary;
       default:
-        return ColorResources.buttonPrimaryLight;
+        return ColorResources.textPrimaryLight;
+    }
+  }
+
+  Color _getTextColor(String buttonText) {
+    switch (buttonText) {
+      case 'AC':
+      case '<':
+        return Colors.white;
+      default:
+        return ColorResources.defaultFontColor;
     }
   }
 
@@ -35,7 +45,7 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final double fontSize = MathUtils.isOperator(text, hasEquals: true) ? Dimens.fontSizeDefault : Dimens.fontSizeSmall;
     final style = TextStyle(
-      color: ColorResources.defaultFontColor,
+      color: _getTextColor(text),
       fontSize: fontSize,
       fontWeight: FontWeight.bold,
     );
@@ -55,7 +65,7 @@ class ButtonWidget extends StatelessWidget {
             ),
           ),
           child: text == '<'
-              ? const Icon(Icons.backspace_outlined, color: ColorResources.defaultFontColor)
+              ? const Icon(Icons.backspace_outlined, color: Colors.white)
               : Text(text, style: style),
         ),
       ),

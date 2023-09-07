@@ -22,7 +22,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       builder: (context, watch, child) {
         final state = watch.watch(calculatorProvider);
         return Container(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(Dimens.paddingPage),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -30,13 +30,15 @@ class _MainPageState extends ConsumerState<MainPage> {
               Text(
                 state.equation,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: Colors.grey, fontSize: 36, height: 1),
+                textAlign: TextAlign.right,
+                style: const TextStyle(color: ColorResources.textPrimary, fontWeight: FontWeight.bold, fontSize: Dimens.fontSizeSmall),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: Dimens.paddingLarge),
               Text(
                 state.result,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: Colors.black, fontSize: 18),
+                textAlign: TextAlign.right,
+                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: Dimens.fontSizeLarge),
               ),
             ],
           ),
@@ -51,7 +53,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       decoration: const BoxDecoration(color: ColorResources.background),
       child: Column(
         children: <Widget>[
-          _buildButtonRow('AC', '<', '', '÷'),
+          _buildButtonRow('AC', '<', '%', '÷'),
           _buildButtonRow('7', '8', '9', '⨯'),
           _buildButtonRow('4', '5', '6', '-'),
           _buildButtonRow('1', '2', '3', '+'),
@@ -116,19 +118,14 @@ class _MainPageState extends ConsumerState<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorResources.buttonPrimary,
-        title: Container(
-          margin: const EdgeInsets.only(left: 8),
-          child: Text(widget.title),
-        ),
+        backgroundColor: ColorResources.textPrimary,
+        title: Text(widget.title),
       ),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Expanded(child: _buildResult()),
-            Expanded(flex: 2, child: _buildButtons()),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(child: _buildResult()),
+          Expanded(flex: 2, child: _buildButtons()),
+        ],
       ),
     );
   }

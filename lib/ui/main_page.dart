@@ -53,7 +53,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       decoration: const BoxDecoration(color: ColorResources.background),
       child: Column(
         children: <Widget>[
-          _buildButtonRow('AC', '<', '%', '÷'),
+          _buildButtonRow('AC', '<', '', '÷'),
           _buildButtonRow('7', '8', '9', '⨯'),
           _buildButtonRow('4', '5', '6', '-'),
           _buildButtonRow('1', '2', '3', '+'),
